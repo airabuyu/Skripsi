@@ -27,7 +27,7 @@ class LoginController extends Controller
                 Cookie::queue('email',$request->email,60);
                 Cookie::queue('password',$request->password,60);
             }
-            return redirect()->intended('/home');
+            return redirect()->intended('/register');
         }
         return back();
     }

@@ -48,6 +48,13 @@
            <span class="tooltip">Files</span>
          </li>
 
+         <li>
+           <a href="/register">
+             <i class='bx bx-folder' ></i>
+             <span class="links_name">Register User</span>
+           </a>
+           <span class="tooltip">Register</span>
+         </li>
 
 
         </ul>

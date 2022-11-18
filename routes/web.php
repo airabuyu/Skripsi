@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +18,5 @@ Route::get('/', [LoginController::class,'index']);
 Route::get('/login', [LoginController::class,'index']);
 Route::post('/login', [LoginController::class,'login']);
 Route::post('/logout', [LoginController::class,'logout']);
-
+Route::get('/register', [RegistrationController::class,'create']);
+Route::post('register', [RegistrationController::class,'store']);
