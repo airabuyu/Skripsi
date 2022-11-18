@@ -24,7 +24,7 @@ class CreateExamsTable extends Migration
 
             $table->timestamps();
 
-            $table->unsignedBigInteger('exam_id');
+            $table->unsignedBigInteger('exam_id')->nullable();
             $table->foreign('exam_id')->references('id')->on('exams');
         });
     }

@@ -25,4 +25,4 @@ Route::post('/logout', [LoginController::class,'logout']);
 Route::get('/question_editor', [QuestionEditorController::class,'index']);
 
 Route::get('/register', [RegistrationController::class,'create']);
-Route::post('register', [RegistrationController::class,'store']);
+Route::post('/register', [RegistrationController::class,'store'])->name('register.store');
