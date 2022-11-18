@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionEditorController;
-
+use App\Http\Controllers\RegistrationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,5 +24,5 @@ Route::post('/logout', [LoginController::class,'logout']);
 
 Route::get('/question_editor', [QuestionEditorController::class,'index']);
 
-
-
+Route::get('/register', [RegistrationController::class,'create']);
+Route::post('register', [RegistrationController::class,'store']);
