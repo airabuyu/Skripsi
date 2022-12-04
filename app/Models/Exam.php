@@ -19,12 +19,12 @@ class Exam extends Model
 
     public function questions()
     {
-        return $this->belongsToMany(Participant::class);
+        return $this->belongsToMany(Question::class);
     }
 
     public function examResults()
     {
-        return $this->belongsToMany(Participant::class);
+        return $this->belongsToMany(ExamResult::class);
     }
 
 }
