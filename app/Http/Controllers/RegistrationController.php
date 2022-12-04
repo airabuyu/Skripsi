@@ -8,21 +8,34 @@ class RegistrationController extends Controller
 {
     public function create()
     {
-        return view('auth.create');
+        return view('register');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $this->validate(request(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required'
+        dd($request);
+        $user_name = $request->input('user_name');
+        $email        = $request->input('email');
+        $password     = $request->input('password');
+        
+        $user = User::create([
+            'user_name'      => $user_name,
+            'email'     => $email,
+            'password'  => Hash::make($password)
         ]);
-        
-        $user = User::create(request(['name', 'email', 'password']));
-        
-        auth()->login($user);
-        
-        return redirect()->to('/games');
+
+        if($user) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Register Berhasil!'
+            ], 201);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Register Gagal!'
+            ], 400);
+        }
+
+        return redirect()->to('/question_editor');
     }
 }
