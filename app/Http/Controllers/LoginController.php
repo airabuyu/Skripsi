@@ -14,6 +14,11 @@ class LoginController extends Controller
         return view('login');
     }
 
+    public function testview(){
+
+        return view('testpage');
+    }
+
     public function login(Request $request){
 
         $credentials = $request->validate([
@@ -23,7 +28,11 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended('/home');
+            if($request->remember_me){
+                Cookie::queue('email',$request->email,60);
+                Cookie::queue('password',$request->password,60);
+            }
+            return redirect()->intended('/exam_list');
         }
         return back();
     }

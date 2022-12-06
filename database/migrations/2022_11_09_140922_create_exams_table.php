@@ -20,11 +20,11 @@ class CreateExamsTable extends Migration
             $table->dateTime('exam_start_dt');
             $table->dateTime('exam_close_dt');
             $table->string('module_name');
-            $table->string('version');
+            $table->string('version')->nullable();
 
             $table->timestamps();
 
-            $table->unsignedBigInteger('exam_id');
+            $table->unsignedBigInteger('exam_id')->nullable();
             $table->foreign('exam_id')->references('id')->on('exams');
         });
     }

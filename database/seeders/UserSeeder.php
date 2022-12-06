@@ -17,16 +17,20 @@ class UserSeeder extends Seeder
         //
         DB::table('users')->insert([
             [
-                'user_name' => 'Eric Jatmiko',
+                'user_name' => 'eric.jatmiko',
+                'name' => 'Eric Jatmiko',
                 'role_id' => 1,
                 'email' => 'eric.jatmiko@ad-ins.com',
-                'password' => '$2y$10$rCB.75GWhcWrk3TyTVCVfuLiiN9384p2YK30a4wdAYxSsu2aF52ly'
+                'password' => '$2y$10$rCB.75GWhcWrk3TyTVCVfuLiiN9384p2YK30a4wdAYxSsu2aF52ly',
+                'is_active' => '1'
             ],
             [
-                'user_name' => 'Rio Febrianto',
+                'user_name' => 'rio.fr',
+                'name' => 'Rio Febrianto',
                 'role_id' => 2,
                 'email' => 'rio.fr@ad-ins.com',
-                'password' => '$2y$10$rCB.75GWhcWrk3TyTVCVfuLiiN9384p2YK30a4wdAYxSsu2aF52ly'
+                'password' => '$2y$10$rCB.75GWhcWrk3TyTVCVfuLiiN9384p2YK30a4wdAYxSsu2aF52ly',
+                'is_active' => '1'
             ]
         ]);
     }

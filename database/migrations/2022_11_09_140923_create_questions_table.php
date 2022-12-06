@@ -20,7 +20,7 @@ class CreateQuestionsTable extends Migration
 
             $table->timestamps();
 
-            $table->unsignedBigInteger('question_type_id');
+            $table->unsignedBigInteger('question_type_id')->nullable();
             $table->foreign('question_type_id')->references('id')->on('question_types');
             $table->unsignedBigInteger('exam_id');
             $table->foreign('exam_id')->references('id')->on('exams');
