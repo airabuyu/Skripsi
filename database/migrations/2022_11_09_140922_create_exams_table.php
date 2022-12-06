@@ -17,10 +17,10 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->string('exam_name');
             $table->dateTime('create_exam_dt');
-            $table->dateTime('start_exam_dt');
-            $table->dateTime('close_exam_dt');
+            $table->dateTime('exam_start_dt');
+            $table->dateTime('exam_close_dt');
             $table->string('module_name');
-            $table->string('version');
+            $table->string('version')->nullable();
 
             $table->timestamps();
 

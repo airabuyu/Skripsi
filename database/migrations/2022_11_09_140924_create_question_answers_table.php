@@ -16,7 +16,7 @@ class CreateQuestionAnswersTable extends Migration
         Schema::create('question_answers', function (Blueprint $table) {
             $table->id();
             $table->string('question_answer_name');
-            $table->string('point_value');
+            $table->string('point_value')->nullable();
             $table->string('is_answer');
 
             $table->timestamps();
