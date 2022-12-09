@@ -11,7 +11,6 @@ class CreateExamController extends Controller
 
     public function index(){
 
-
         return view('create_exam');
     }
 
@@ -21,17 +20,24 @@ class CreateExamController extends Controller
 
         $exam = new Exam();
         $exam->exam_name = $request->exam_name;
-        $exam->exam_start_dt = $request->startdt;
-        $exam->exam_close_dt = $request->enddt;
+
+        $time = strtotime($request->startdt);
+
+        $newformat = date('Y-m-d H:i:s',$time);
+
+
+        $time2 = strtotime($request->enddt);
+
+        $newformat2 = date('Y-m-d H:i:s',$time2);
+
+
+        $exam->exam_start_dt = $newformat;
+        $exam->exam_close_dt = $newformat2;
         $exam->module_name = $request->module_name;
         $exam->create_exam_dt = date('Y-m-d H:i:s');
 
         $exam->save();
 
-        // $food->ingredients()->attach($request->field_name);
-
-
-        // return redirect('/question_editor', compact('exam'));
         return redirect()->route('question_editor_view')->with(['exam' => $exam] );
     }
 }

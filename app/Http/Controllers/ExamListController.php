@@ -15,4 +15,11 @@ class ExamListController extends Controller
 
         return view('exam_list', compact('exams'));
     }
+
+
+    public function destroy(Exam $exam){
+        Exam::where('id', $exam->id)->delete();
+
+        return back();
+    }
 }

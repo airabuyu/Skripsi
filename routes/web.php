@@ -37,3 +37,6 @@ Route::post('/register', [RegistrationController::class,'store'])->name('registe
 
 
 Route::get('/exam_list', [ExamListController::class,'index']);
+Route::get('/delete_exam/{exam}', [ExamListController::class,'destroy']);
+
+

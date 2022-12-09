@@ -13,7 +13,7 @@
 
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -64,7 +64,7 @@
             </li>
 
             <li>
-                <a href="/create_exam">
+                <a href="/exam_list">
                     <i class='bx bx-folder'></i>
                     <span class="links_name">Create Exam</span>
                 </a>

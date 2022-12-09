@@ -22,7 +22,7 @@ class CreateQuestionAnswersTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');;
         });
     }
 
