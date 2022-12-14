@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionEditorController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ExamListController;
+use App\Http\Controllers\ManageFileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,5 +40,9 @@ Route::post('/register', [RegistrationController::class,'store'])->name('registe
 
 Route::get('/exam_list', [ExamListController::class,'index']);
 Route::get('/delete_exam/{exam}', [ExamListController::class,'destroy']);
+
+Route::get('/manage_file', [ManageFileController::class,'インデクス']);
+
+
 
 

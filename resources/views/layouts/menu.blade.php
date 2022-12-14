@@ -15,6 +15,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
+
+    <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Hello, world!</title>
@@ -71,6 +76,14 @@
                 <span class="tooltip">Create Exam</span>
             </li>
 
+
+            <li>
+                <a href="/manage_file">
+                    <i class='bx bx-folder'></i>
+                    <span class="links_name">Manage File</span>
+                </a>
+                <span class="tooltip">Manage File</span>
+            </li>
 
         </ul>
     </div>
