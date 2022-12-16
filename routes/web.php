@@ -41,7 +41,13 @@ Route::post('/register', [RegistrationController::class,'store'])->name('registe
 Route::get('/exam_list', [ExamListController::class,'index']);
 Route::get('/delete_exam/{exam}', [ExamListController::class,'destroy']);
 
-Route::get('/manage_file', [ManageFileController::class,'インデクス']);
+Route::get('/manage_file', [ManageFileController::class,'index']);
+Route::post('/create_folder', [ManageFileController::class,'createFolder']);
+Route::post('/create_file', [ManageFileController::class,'createFile']);
+Route::delete('/delete_file', [ManageFileController::class,'deleteFile']);
+Route::delete('/delete_folder', [ManageFileController::class,'deleteFolder']);
+Route::post('/download_file', [ManageFileController::class,'downloadFile']);
+
 
 
 

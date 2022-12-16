@@ -54,7 +54,7 @@
 
             <li>
                 <a href="#">
-                    <i class='bx bx-folder'></i>
+                    <i class='bx bx-file'></i>
                     <span class="links_name">File Manager</span>
                 </a>
                 <span class="tooltip">Files</span>
@@ -62,7 +62,7 @@
 
             <li>
                 <a href="/register">
-                    <i class='bx bx-folder'></i>
+                    <i class='bx bx-user-plus'></i>
                     <span class="links_name">Register User</span>
                 </a>
                 <span class="tooltip">Register</span>
@@ -70,7 +70,7 @@
 
             <li>
                 <a href="/exam_list">
-                    <i class='bx bx-folder'></i>
+                    <i class='bx bx-task'></i>
                     <span class="links_name">Create Exam</span>
                 </a>
                 <span class="tooltip">Create Exam</span>
@@ -79,10 +79,18 @@
 
             <li>
                 <a href="/manage_file">
-                    <i class='bx bx-folder'></i>
+                    <i class='bx bx-folder-open'></i>
                     <span class="links_name">Manage File</span>
                 </a>
                 <span class="tooltip">Manage File</span>
+            </li>
+
+            <li>
+                <a href="/manage_file">
+                    <i class='bx bx-file'></i>
+                    <span class="links_name">Report</span>
+                </a>
+                <span class="tooltip">Report</span>
             </li>
 
         </ul>
