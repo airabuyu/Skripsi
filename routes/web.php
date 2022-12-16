@@ -6,8 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionEditorController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ExamListController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManageFileController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +35,7 @@ Route::post('/question_editor', [CreateExamController::class,'createExam']);
 
 
 Route::get('/register', [RegistrationController::class,'create']);
-Route::post('/register', [RegistrationController::class,'store'])->name('register.store');
+Route::post('/register', [RegistrationController::class,'store']);
 
 
 Route::get('/exam_list', [ExamListController::class,'index']);
@@ -52,3 +52,8 @@ Route::post('/download_file', [ManageFileController::class,'downloadFile']);
 
 
 
+
+Route::get('/homeregister',[UserController::class,'usershowsearch']);
+Route::get('/userdetail/{userid}',[UserController::class,'userdetail']);
+Route::post('/userdetail/update/{id}',[UserController::class,'updateUser']);
+Route::get('/resetpassword/{userid}',[UserController::class,'resetPassword']);
