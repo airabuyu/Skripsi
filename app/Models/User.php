@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -19,8 +20,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'user_name',
+        'name',
         'email',
         'password',
+        'date_of_birth',
+        'phone_number',
+        'user_img',
+        'is_active',
+        'role_id',
     ];
 
     /**
@@ -50,5 +57,10 @@ class User extends Authenticatable
     public function examResult()
     {
         return $this->belongsTo(ExamResult::class);
+    }
+
+    public function getPaginationUser()
+    {
+        return DB::table('users')->select('*')->paginate(8)->withQueryString();
     }
 }

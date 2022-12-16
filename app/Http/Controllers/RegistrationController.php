@@ -3,39 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Role;
+use Illuminate\Support\Facades\Input;
 class RegistrationController extends Controller
 {
     public function create()
     {
-        return view('register');
+        $roles = Role::all();
+        return view('register', compact('roles'));
     }
 
     public function store(Request $request)
-    {
-        dd($request);
-        $user_name = $request->input('user_name');
-        $email        = $request->input('email');
-        $password     = $request->input('password');
-        
-        $user = User::create([
-            'user_name'      => $user_name,
-            'email'     => $email,
-            'password'  => Hash::make($password)
+    {        
+        // $validateData['password'] = Input::get('role_id') == 'true' ? 1 : 0;
+        // dd($request->all());
+        $validateData = $request->validate([
+            'user_name' => 'required|max:50',
+            'name' => 'required',
+            'email' => 'required|max:50',
+            'password' => 'required',
+            'date_of_birth' => 'required',
+            'phone_number' => 'required|numeric',
+            'user_img',
+            'is_active' => 'required',
+            'role_id' => 'required',
         ]);
+        $validateData['password'] = Hash::make($validateData['password']);
+        User::create($validateData);
 
-        if($user) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Register Berhasil!'
-            ], 201);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Register Gagal!'
-            ], 400);
-        }
-
-        return redirect()->to('/question_editor');
+        return redirect()->to('/exam_list');
     }
 }

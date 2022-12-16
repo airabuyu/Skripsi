@@ -28,7 +28,7 @@
           <a class="mr-5" href="/home">Home</a>
           <a class="mr-5" href="/view">View</a>
           <a class="mr-5" href="/login">Login</a>
-          <a class="mr-5" href="/register">Register</a>
+          <a class="mr-5" href="/homeregister">Register</a>
         </form>
     </nav> --}}
 
@@ -56,11 +56,11 @@
             </li>
 
             <li>
-                <a href="/register">
+                <a href="/homeregister">
                     <i class='bx bx-folder'></i>
-                    <span class="links_name">Register User</span>
+                    <span class="links_name">User Home</span>
                 </a>
-                <span class="tooltip">Register</span>
+                <span class="tooltip">User Home</span>
             </li>
 
             <li>
