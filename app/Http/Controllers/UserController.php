@@ -15,13 +15,14 @@ class UserController extends Controller
 {
     public function usershowsearch()
     {
+        Paginator::useBootstrap();
         $users = User::getPaginationUser();
         $stringSearch = 0;
         if(request('search') != null)
         {
             $stringSearch = request('search');
             $users = DB::table('users')->where('name','like','%'.$stringSearch.'%')
-            ->paginate(8)->withQueryString();
+            ->paginate(2)->withQueryString();
 
         }
 
