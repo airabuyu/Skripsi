@@ -117,7 +117,9 @@ class ManageFileController extends Controller
 
         $path = $request->path;
 
-        $parts  = explode('/', $path);
+        $parts  = explode('\\', $path);
+
+
 
         $path = '';
 
@@ -127,7 +129,6 @@ class ManageFileController extends Controller
 
             $path = join('/', $parts);
         }
-
 
         $files = File::files($path);
         // dd($files->getFilename);
