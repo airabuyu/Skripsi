@@ -47,6 +47,8 @@ Route::post('/create_file', [ManageFileController::class,'createFile']);
 Route::delete('/delete_file', [ManageFileController::class,'deleteFile']);
 Route::delete('/delete_folder', [ManageFileController::class,'deleteFolder']);
 Route::post('/download_file', [ManageFileController::class,'downloadFile']);
+Route::get('/folder_click/{path}', [ManageFileController::class,'folderClick'])->where('path', '.*');;
+Route::get('/folder_back/{path}', [ManageFileController::class,'folderBack'])->where('path', '.*');;
 
 
 

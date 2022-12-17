@@ -21,8 +21,8 @@ class UserController extends Controller
         {
             $stringSearch = request('search');
             $users = DB::table('users')->where('name','like','%'.$stringSearch.'%')
-            ->paginate(8)->withQuerystring();
-            
+            ->paginate(8)->withQueryString();
+
         }
 
         return view('homeregister', compact('users'));
@@ -50,7 +50,7 @@ class UserController extends Controller
 
     public function updateUser(Request $request,$id)
     {
-        
+
         $request->validate([
             'user_name' => 'required|max:50',
             'name' => 'required',
@@ -64,7 +64,7 @@ class UserController extends Controller
         $setcheck = $request->is_active;
         if($setcheck != 1)
         {
-            $setcheck = 0;                
+            $setcheck = 0;
         }
 
         User::find($id)->update([

@@ -1,8 +1,5 @@
 @extends('layouts.menu')
 @section('content')
-<head>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
 <div class="container" style="margin-top: 50px">
     <div class="row">
         <div class="col-md-5 offset-md-3">

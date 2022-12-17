@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Support\Facades\Crypt;
 
 class ManageFileController extends Controller
 {
@@ -50,17 +51,32 @@ class ManageFileController extends Controller
     public function createFolder(Request $request){
         // dd($request->path);
         // dd($request->folder_name);
-        $path = $request->path . "\\" . $request->folder_name;
+        $path2 = $request->path . "\\" . $request->folder_name;
 
         // File::makeDirectory($path);
 
 
 
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
+        if(!File::isDirectory($path2)){
+            File::makeDirectory($path2, 0777, true, true);
         }
 
-        return redirect('manage_file');
+        $path = $request->path;
+        $files = File::files($path);
+
+        // dd($files->getFilename);
+        $filesInFolder = File::files($path);
+        $x = File::files($path);
+
+
+        $folders = File::directories($path);
+
+
+        // dd($files);
+        $directories = array_map('basename', File::directories($path));
+
+        // return view('manage_file')->with(['path' => $path] );
+        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
     }
 
     public function createFile(Request $request){
@@ -86,13 +102,64 @@ class ManageFileController extends Controller
 
         File::delete( $request->path);
 
-        return redirect('manage_file');
+        $path = $request->path;
+
+        $parts  = explode('/', $path);
+
+        $path = '';
+
+        array_pop($parts);
+
+        foreach ($parts as &$piece){
+
+            $path = join('/', $parts);
+        }
+
+
+        $files = File::files($path);
+        // dd($files->getFilename);
+        $filesInFolder = File::files($path);
+
+
+        $folders = File::directories($path);
+
+
+        // dd($files);
+        $directories = array_map('basename', File::directories($path));
+
+        // return view('manage_file')->with(['path' => $path] );
+        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
     }
 
     public function deleteFolder(Request $request){
         File::deleteDirectory($request->path);
 
-        return redirect('manage_file');
+        $path = $request->path;
+
+        $parts  = explode('\\', $path);
+
+
+        $path = array_pop($parts);
+
+        foreach ($parts as &$piece){
+
+            $path = join('/', $parts);
+        }
+
+
+        $files = File::files($path);
+        // dd($files->getFilename);
+        $filesInFolder = File::files($path);
+
+
+        $folders = File::directories($path);
+
+
+        // dd($files);
+        $directories = array_map('basename', File::directories($path));
+
+        // return view('manage_file')->with(['path' => $path] );
+        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
     }
 
 
@@ -100,5 +167,68 @@ class ManageFileController extends Controller
     {
         return response()->download($request->path);
     }
+
+    public function folderClick($path)
+    {
+        // $path = 'D:\myfiles' . "\\" . $file;
+
+        $files = File::files($path);
+        // dd($files->getFilename);
+        $filesInFolder = File::files($path);
+
+
+        $folders = File::directories($path);
+
+
+        // dd($files);
+        $directories = array_map('basename', File::directories($path));
+
+        // return view('manage_file')->with(['path' => $path] );
+        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
+    }
+
+    public function folderBack($path)
+    {
+        // $path = 'D:\myfiles' . "\\" . $file;
+        // dd($path);
+        $path = Crypt::decrypt($path);
+
+
+        $parts  = explode('/', $path);
+
+        $path = '';
+
+        array_pop($parts);
+
+        foreach ($parts as &$piece){
+
+            $path = join('/', $parts);
+        }
+
+
+
+        $files = File::files($path);
+        // dd($files->getFilename);
+        $filesInFolder = File::files($path);
+
+
+        $folders = File::directories($path);
+
+
+        // dd($files);
+        $directories = array_map('basename', File::directories($path));
+        // dd($path);
+
+        // if($path == 'D:/myfile'){
+        //     dd("sama");
+        // }
+        // else{
+        //     dd("beda");
+        // }
+
+        // return view('manage_file')->with(['path' => $path] );
+        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
+    }
+
 
 }

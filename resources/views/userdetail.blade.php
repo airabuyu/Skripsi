@@ -1,8 +1,5 @@
 @extends('layouts.menu')
 @section('content')
-<head>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
 <div class="container" style="margin-top: 50px">
     <div class="row">
         <div class="col-md-5 offset-md-3">
@@ -43,7 +40,7 @@
                                 <option value="2" name="role_id">User</option>
                                 <option value="1" name="role_id">Admin</option>
                             </select>
-                            
+
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="{{ old('phone_number',$userdetails->is_active) }}" checked>

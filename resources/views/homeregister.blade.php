@@ -1,7 +1,5 @@
 @extends('layouts.menu')
 @section('content')
-<head>
-</head>
 
 <div class="row justify-content-center">
         <div class="col-md-10 mt-2">
@@ -18,7 +16,7 @@
 </div>
 <div class="container mb-5">
     <div class="container mb-5">
-    <a class="btn btn-primary" href="/register">Register new User</a>
+    <a class="btn btn-primary mb-4" href="/register">Register new User</a>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
@@ -37,7 +35,7 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->user_name }}</td>
             <td>
-                <a class="btn btn-primary" href="/userdetail/{{$user->id}}">Edit</a> 
+                <a class="btn btn-primary" href="/userdetail/{{$user->id}}">Edit</a>
                 <a class="btn btn-primary" href="/resetpassword/{{$user->id}}">Reset</a>
             </td>
         </tr>
