@@ -27,6 +27,9 @@ Route::post('/logout', [LoginController::class,'logout']);
 Route::get('/testview', [LoginController::class,'testview']);
 
 
+Route::get('/view_questions/{exam}', [QuestionEditorController::class,'viewQuestion']);
+Route::get('/question_viewer/{exam}', [QuestionEditorController::class,'questionViewer']);
+
 Route::get('/question_editor', [QuestionEditorController::class,'index'])->name('question_editor_view');;
 Route::post('/question_generator/{exam}', [QuestionEditorController::class,'createQuestion']);
 

@@ -19,7 +19,7 @@ class Exam extends Model
 
     public function questions()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->hasMany(Question::class);
     }
 
     public function examResults()

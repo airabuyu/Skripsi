@@ -11,9 +11,10 @@ class Question extends Model
     protected $table = 'questions';
     protected $guarded = ['id'];
 
-    public function questionAnswer()
+    public function questionAnswers()
     {
-        return $this->belongsTo(QuestionAnswer::class);
+        return $this->hasMany(QuestionAnswer::class);
+        // ok
     }
 
     public function exam()

@@ -2,12 +2,12 @@
 @section('content')
 
 
-<form action="/question_generator/{{ $exam->id }}" method="post" enctype="multipart/form-data" class="row col-10 my-form border" style="padding: 20px; margin-left:auto; margin-right:auto;" >
+<form action="/question_generator/{{ $exams[0]->id }}" method="post" enctype="multipart/form-data" class="row col-10 my-form border" style="padding: 20px; margin-left:auto; margin-right:auto;" >
     @csrf
 
     <input type="hidden" class="total_question" name= "total_question" value="0">
 
-    <h4 class="fw-bold text-center mt-3">{{ $exam->exam_name }}</h4>
+    <h4 class="fw-bold text-center mt-3">{{ $exams[0]->exam_name }}</h4>
 
     <button type="submit" class="btn btn-primary" style="margin-left: auto;">
         Create Exam
@@ -25,7 +25,7 @@
 
         <div class="number mt-4"></div>
         <div class="form-group">
-            <textarea  class="form-control" name="question_name[]"  id="testArea" rows="3"></textarea>
+            <textarea  class="form-control textarea" name="question_name[]"  id="testArea" rows="3"></textarea>
         </div>
 
 
@@ -96,9 +96,127 @@
     $(document).ready(function () {
         const addQuestionGroupButton = $('.add_div');
         addQuestionGroupButton.click(addQuestionGroup);
-        addQuestionGroup(); // Show first group on load
+
+
+        let countQuestions = {!! json_encode($countQuestions) !!};
+        let exams =  {!! json_encode($exams[0]->questions) !!};
+
+        for(let i=0;i<countQuestions;i++){
+            editQuestionGroup(exams[i]); // Show first group on load
+        }
+
     });
 
+    const editQuestionGroup = (exams) => {
+        const newQuestionGroup = $('.question-group').first().clone();
+
+        const myForm = $('.my-form');
+
+        let curr = myForm.find('.question-group').length;
+        let number = myForm.find('.number');
+
+        const divs = document.getElementsByClassName('question-group');
+
+        totalQuestions = $('.my-form').children('.question-group').children('.close').length;
+
+        $('.my-form').append(newQuestionGroup);
+
+        divs[curr].querySelector('.number').innerText = curr;
+        divs[curr].querySelector('.textarea').innerText = exams.question_name;
+
+        newQuestionGroup.removeClass('d-none');
+
+        if(exams.question_type_id == 1){
+            for(let i=0;i<exams.question_answers.length;i++){
+                editCheckBox(newQuestionGroup, exams.question_answers[i]);
+            }
+        }
+        else if(exams.question_type_id == 2){
+            for(let i=0;i<exams.question_answers.length;i++){
+                editRadioButton(newQuestionGroup, exams.question_answers[i]);
+            }
+        }
+
+        newQuestionGroup.find('.add_button').click(function(){
+            addCheckBox(newQuestionGroup);
+        });
+        newQuestionGroup.find('.add_button2').click(function(){
+            addRadioButton(newQuestionGroup);
+        });
+        newQuestionGroup.find('.close').click(function() {
+            deleteQuestion(newQuestionGroup);
+        });
+
+        document.getElementsByClassName('total_question')[0].setAttribute('value', totalQuestions);
+    };
+
+
+    const editCheckBox = (currentQuestionGroup, questionAnswers) => {
+        let currIndex = parseInt(currentQuestionGroup.children('.number').text());
+
+        let checkedString = "";
+
+        if(questionAnswers.is_answer == 1){
+            checkedString = "checked";
+        }
+
+        clearCurrentForm(currentQuestionGroup, constants.TYPE_RADIO_BUTTON);
+        var fieldHTML = $(`<div class="input-group mb-3 my-check-box-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="hidden" name="question_type${currIndex}" value="checkbox" />
+                        <input class="choose_input" type="hidden" name="options${currIndex}[]" value="0">
+                        <input ${checkedString}  class="choose_input" name="options${currIndex}[]" value="1" type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <input value="${questionAnswers.question_answer_name}"  name="names${currIndex}[]" type="text" class="form-control text_input" aria-label="Text input with checkbox">
+                ${removeButtonHtml}
+            </div>`);
+
+        fieldHTML.find('.remove_button').click(function() {
+            fieldHTML.remove();
+        });
+
+
+        const count = currentQuestionGroup.children('.checkbox-radio-container').children('.my-check-box-group').length;
+        if (count < max.checkBox) {
+            currentQuestionGroup.children('.checkbox-radio-container').append(fieldHTML);
+        }
+    };
+
+    const editRadioButton = (currentQuestionGroup, questionAnswers) => {
+
+        let currIndex = parseInt(currentQuestionGroup.children('.number').text());
+
+        let checkedString = "";
+
+        if(questionAnswers.is_answer == 1){
+            checkedString = "checked";
+        }
+
+        clearCurrentForm(currentQuestionGroup, constants.TYPE_CHECK_BOX);
+        const fieldHTML = $(`<div class="input-group mb-3 my-radio-button-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="hidden" name="question_type${currIndex}" value="radio" />
+                        <input class="choose_input" type="hidden" name="options${currIndex}[]" value="0" />
+                        <input ${checkedString}   class="choose_input"  name="options${currIndex}[]" value="1" type="radio" aria-label="Radio button for following text input" />
+                    </div>
+                </div>
+                <input value="${questionAnswers.question_answer_name}"  name="names${currIndex}[]" type="text" class="form-control text_input" aria-label="Text input with radio button" />
+                ${removeButtonHtml}
+            </div>
+        </div>`);
+
+        fieldHTML.find('.remove_button').click(function() {
+            fieldHTML.remove();
+        });
+
+        const count = currentQuestionGroup.children('.checkbox-radio-container').children('.my-radio-button-group').length;
+        if (count < max.radioButton) {
+            currentQuestionGroup.children('.checkbox-radio-container').append(fieldHTML);
+        }
+    };
 
     const addQuestionGroup = () => {
         const newQuestionGroup = $('.question-group').first().clone();

@@ -21,5 +21,6 @@ class ExamResult extends Model
     public function exams()
     {
         return $this->hasMany(Exam::class);
+        // ok
     }
 }

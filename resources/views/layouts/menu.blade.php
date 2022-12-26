@@ -23,7 +23,7 @@
 
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-    <title>Hello, world!</title>
+    <title>Training Adins</title>
 </head>
 
 <body>
