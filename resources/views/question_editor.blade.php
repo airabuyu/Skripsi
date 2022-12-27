@@ -220,6 +220,7 @@
         if(totalQuestions > 1 && currIndex != 1) {
             currentQuestionGroup.remove();
             totalQuestions--;
+            document.getElementsByClassName('total_question')[0].setAttribute('value', totalQuestions);
         }
     };
 

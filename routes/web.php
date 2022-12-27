@@ -32,6 +32,7 @@ Route::get('/question_viewer/{exam}', [QuestionEditorController::class,'question
 
 Route::get('/question_editor', [QuestionEditorController::class,'index'])->name('question_editor_view');;
 Route::post('/question_generator/{exam}', [QuestionEditorController::class,'createQuestion']);
+Route::post('/question_duplicate/{exam}', [QuestionEditorController::class,'duplicateQuestion']);
 
 Route::get('/create_exam', [CreateExamController::class,'index']);
 Route::post('/question_editor', [CreateExamController::class,'createExam']);
@@ -43,6 +44,9 @@ Route::post('/register', [RegistrationController::class,'store']);
 
 Route::get('/exam_list', [ExamListController::class,'index']);
 Route::get('/delete_exam/{exam}', [ExamListController::class,'destroy']);
+Route::get('/edit_exam/{exam}', [ExamListController::class,'editExam']);
+Route::post('/exam_editor', [ExamListController::class,'updateExam']);
+
 
 Route::get('/manage_file', [ManageFileController::class,'index']);
 Route::post('/create_folder', [ManageFileController::class,'createFolder']);

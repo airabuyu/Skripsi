@@ -54,14 +54,6 @@
             </li>
 
             <li>
-                <a href="#">
-                    <i class='bx bx-file'></i>
-                    <span class="links_name">File Manager</span>
-                </a>
-                <span class="tooltip">Files</span>
-            </li>
-
-            <li>
                 <a href="/homeregister">
                     <i class='bx bx-user-plus'></i>
                     <span class="links_name">User Home</span>

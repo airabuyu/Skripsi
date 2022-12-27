@@ -2,7 +2,7 @@
 @section('content')
 
 
-<form action="/question_generator/{{ $exams[0]->id }}" method="post" enctype="multipart/form-data" class="row col-10 my-form border" style="padding: 20px; margin-left:auto; margin-right:auto;" >
+<form action="/question_duplicate/{{ $exams[0]->id }}" method="post" enctype="multipart/form-data" class="row col-10 my-form border" style="padding: 20px; margin-left:auto; margin-right:auto;" >
     @csrf
 
     <input type="hidden" class="total_question" name= "total_question" value="0">
@@ -108,6 +108,8 @@
     });
 
     const editQuestionGroup = (exams) => {
+        console.log(exams);
+
         const newQuestionGroup = $('.question-group').first().clone();
 
         const myForm = $('.my-form');
@@ -298,8 +300,7 @@
                 </div>
                 <input  name="names${currIndex}[]" type="text" class="form-control text_input" aria-label="Text input with radio button" />
                 ${removeButtonHtml}
-            </div>
-        </div>`);
+            </div>`);
 
         fieldHTML.find('.remove_button').click(function() {
             fieldHTML.remove();
@@ -338,7 +339,9 @@
         if(totalQuestions > 1 && currIndex != 1) {
             currentQuestionGroup.remove();
             totalQuestions--;
+            document.getElementsByClassName('total_question')[0].setAttribute('value', totalQuestions);
         }
+
     };
 
 </script>

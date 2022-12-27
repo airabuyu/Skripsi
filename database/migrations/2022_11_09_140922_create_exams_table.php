@@ -17,15 +17,15 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->string('exam_name');
             $table->dateTime('create_exam_dt');
-            $table->dateTime('exam_start_dt');
-            $table->dateTime('exam_close_dt');
+            $table->dateTime('exam_start_dt')->nullable();
+            $table->dateTime('exam_close_dt')->nullable();
             $table->string('module_name');
             $table->string('version')->nullable();
 
             $table->timestamps();
 
-            $table->unsignedBigInteger('exam_id')->nullable();
-            $table->foreign('exam_id')->references('id')->on('exams');
+            // $table->unsignedBigInteger('exam_id')->nullable();
+            // $table->foreign('exam_id')->references('id')->on('exams');
         });
     }
 
