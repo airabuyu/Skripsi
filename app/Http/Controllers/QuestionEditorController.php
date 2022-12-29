@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\Question;
 use App\Models\QuestionAnswer;
-
+use App\Models\ExamResult;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionEditorController extends Controller
 {
@@ -153,20 +154,71 @@ class QuestionEditorController extends Controller
     public function viewQuestion(Request $request)
     {
         $exam = Exam::find($request->exam_id);
+        // $diff = strtotime($exam->exam_close_dt) - strtotime($exam->exam_start_dt);
 
 
-        // dd($request->user_id);
+        // $newformat = date('Y-m-d H:i:s',time());
+
+
+        // $time2 = strtotime($request->enddt);
+        // dd($newformat);
+        // dd($diff);
         return view('question_list', compact('exam'));
     }
 
     public function submitAnswers(Request $request)
     {
-        dd($request->all());
-        $exam = Exam::find($request->exam_id);
+        // dd($request->all());
+        // $exam = Exam::find($request->exam_id);
+        // dd(count($request->questions));
+        // dd($exam);
+        $mistakes = 0;
+        echo($request->exam_id . "<br>");
+        for($i=0; $i<count($request->questions);$i++){
+            $arrops = $request->{'options' . $request->questions[$i]};
+            // dd($request->questions[$i]);
+
+            foreach (array_keys($arrops, "1", true) as $key) {
+
+                unset($arrops[$key-1]);
+
+            }
 
 
+            $arrops = array_values($arrops);
+            echo($request->questions[$i]);
+            echo("<br>");
+
+
+            $listAnswers = QuestionAnswer::where('question_id', $request->questions[$i])->get();
+
+            echo($listAnswers);
+            echo("<br>");
+            // dd($listAnswers);
+
+            for($j=0; $j<count($listAnswers);$j++){
+                echo($listAnswers[$j]->is_answer . "(" .$listAnswers[$j]->question_answer_name  . ")" . " COMPARE " . $arrops[$j] . "<br>");
+                if($listAnswers[$j]->is_answer != $arrops[$j]){
+
+                    $mistakes++;
+                    break;
+                }
+            }
+        }
+
+        $examResult = new ExamResult();
+        $examResult->user_id = Auth::user()->id;
+        $examResult->exam_id = $request->exam_id;
+        $examResult->score = (count($request->questions)- $mistakes) / count($request->questions) * 100;
+
+        $examResult->save();
+
+
+
+        // dd((count($request->questions)-$mistakes) / count($request->questions) * 100);
+        // dd($mistakes);
         // dd($request->user_id);
-        return view('question_list', compact('exam'));
+        return redirect('dashboard');
     }
 
 }
