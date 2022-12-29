@@ -8,6 +8,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ExamListController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManageFileController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,8 +28,9 @@ Route::post('/logout', [LoginController::class,'logout']);
 Route::get('/testview', [LoginController::class,'testview']);
 
 
-Route::get('/view_questions/{exam}', [QuestionEditorController::class,'viewQuestion']);
+Route::post('/view_questions', [QuestionEditorController::class,'viewQuestion']);
 Route::get('/question_viewer/{exam}', [QuestionEditorController::class,'questionViewer']);
+Route::post('/submit_answers', [QuestionEditorController::class,'submitAnswers']);
 
 Route::get('/question_editor', [QuestionEditorController::class,'index'])->name('question_editor_view');;
 Route::post('/question_generator/{exam}', [QuestionEditorController::class,'createQuestion']);
@@ -58,6 +60,7 @@ Route::get('/folder_click/{path}', [ManageFileController::class,'folderClick'])-
 Route::get('/folder_back/{path}', [ManageFileController::class,'folderBack'])->where('path', '.*');;
 
 
+Route::get('/dashboard', [DashboardController::class,'index']);
 
 
 

@@ -17,6 +17,9 @@
                 <tr>
                     <th>Exam Name</th>
                     <th>Module Name</th>
+                    <th>Date</th>
+                    <th>Start Date</th>
+                    <th>Close Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,6 +32,9 @@
                     <td>{{ $e->exam_name . " Version." . $e->version }}</td>
                     @endif
                     <td>{{ $e->module_name }}</td>
+                    <td>{{ date('d F Y', strtotime($e->exam_start_dt))}} </td>
+                    <td>{{ date('H:i', strtotime($e->exam_start_dt))}} </td>
+                    <td>{{ date('H:i', strtotime($e->exam_close_dt))}} </td>
                     <td>
                         <a href="/edit_exam/{{$e->id}}"  class="add" title="Edit Exam" data-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

@@ -32,7 +32,7 @@ class LoginController extends Controller
                 Cookie::queue('email',$request->email,60);
                 Cookie::queue('password',$request->password,60);
             }
-            return redirect()->intended('/create_exam');
+            return redirect()->intended('/dashboard');
         }
         return back();
     }

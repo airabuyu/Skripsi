@@ -7,27 +7,33 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ $exam->exam_name }}</div>
-                    <form method="POST" action="">
+                    <form method="POST" action="/submit_answers" enctype="multipart/form-data">
                         @csrf
-
+                            <?php
+                                $i = 1;
+                            ?>
                             @foreach($exam->questions as $question )
+
+
 
                             <div class="card-body">
                                         <div class="card">
-                                            <div class="card-header">{{ $question->question_name }}</div>
-
+                                            <div class="card-header">{{$i . ". " . $question->question_name }}</div>
+                                            <?php
+                                                $i++;
+                                            ?>
+                                             <input type="hidden" name="questions[]" value="{{ $question->id }}">
 
                                             <div class="card-body">
                                                     @foreach($question->questionAnswers as $answer)
 
                                                         @if ($question->question_type_id == 1)
                                                         <div class="form-check">
+                                                            <input class="choose_input"  type="hidden" name="options{{ $question->id }}[]" value="0">
+
                                                             <input
-                                                                @if($answer->is_answer)
-                                                                checked
-                                                                @endif
-                                                            class="form-check-input" type="checkbox" name="questiod">
-                                                            <label class="form-check-label" for="option-">
+                                                            class="form-check-input" id="option-c{{$answer->id}}" value="1" type="checkbox" name="options{{ $question->id }}[]">
+                                                            <label class="form-check-label" for="option-c{{$answer->id}}">
                                                                     {{ $answer->question_answer_name }}
                                                         </label>
                                                         </div>
@@ -37,12 +43,11 @@
                                                         @elseif ($question->question_type_id == 2)
 
                                                         <div class="form-check">
+                                                            <input class="choose_input"  type="hidden" name="options{{ $question->id }}[]" value="0">
+
                                                             <input
-                                                                @if($answer->is_answer)
-                                                                checked
-                                                                @endif
-                                                            class="form-check-input" type="radio" name="questiod">
-                                                            <label class="form-check-label" for="option-">
+                                                            class="form-check-input" id="option-r{{$answer->id}}}" type="radio" name="options{{ $question->id }}[]" value="1">
+                                                            <label class="form-check-label" for="option-r{{$answer->id}}}">
                                                                 {{ $answer->question_answer_name }}
 
                                                         </label>

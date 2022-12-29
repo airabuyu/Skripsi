@@ -150,8 +150,23 @@ class QuestionEditorController extends Controller
     }
 
 
-    public function viewQuestion(Request $request, Exam $exam)
+    public function viewQuestion(Request $request)
     {
+        $exam = Exam::find($request->exam_id);
+
+
+        // dd($request->user_id);
         return view('question_list', compact('exam'));
     }
+
+    public function submitAnswers(Request $request)
+    {
+        dd($request->all());
+        $exam = Exam::find($request->exam_id);
+
+
+        // dd($request->user_id);
+        return view('question_list', compact('exam'));
+    }
+
 }
