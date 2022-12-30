@@ -41,7 +41,7 @@
                             <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="{{ old('phone_number',$userdetails->is_active) }}" checked>
                             <label class="form-check-label">Is Active</label>
                         </div>
-                        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+                        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Save</button>
                         <a href="/homeregister"  class="w-100 btn btn-lg btn-danger mt-3" title="Cancel">Cancel</a>
                     </form>
                     </main>
