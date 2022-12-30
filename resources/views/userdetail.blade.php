@@ -30,11 +30,6 @@
                             <label for="name"></label>
                         </div>
                         <div class="form-floating">
-                            <input type="password" class="form-control rounded-bottom" name="password" id="password" required
-                                placeholder="Password">
-                            <label for="password"></label>
-                        </div>
-                        <div class="form-floating">
                             <label>Role </label>
                             <select name="role_id" id="role_id" class="form-control">
                                 <option value="2" name="role_id">User</option>
