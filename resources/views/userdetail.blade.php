@@ -25,7 +25,7 @@
                             <label for="name"></label>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control rounded-top" name="phone_number" id="phone_number" required
+                            <input type="number" class="form-control rounded-top" name="phone_number" id="phone_number" required
                                 value="{{ old('phone_number',$userdetails->phone_number) }}" placeholder="Phone Number">
                             <label for="name"></label>
                         </div>
@@ -47,6 +47,7 @@
                             <label class="form-check-label">Is Active</label>
                         </div>
                         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+                        <a href="/homeregister"  class="w-100 btn btn-lg btn-danger mt-3" title="Cancel">Cancel</a>
                     </form>
                     </main>
                 </div>

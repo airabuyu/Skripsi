@@ -106,12 +106,16 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if(Auth::user()->user_img)
+                            <img class="rounded-circle" src="/storage/user_img/{{ Auth::user()->user_img}}" alt="profile_image" width="40" height="40" class="rounded-circle">
+                            @else
                             <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
                                 width="40" height="40" class="rounded-circle">
+                            @endif
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Dashboard</a>
-                            <a class="dropdown-item" href="#">Edit Profile</a>
+                            <a class="dropdown-item" href="/changepassword">Change Password</a>
+                            <a class="dropdown-item" href="/changeprofile">Change Profile</a>
                             <a class="dropdown-item" href="/logout">Log Out</a>
                         </div>
                     </li>

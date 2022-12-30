@@ -67,7 +67,10 @@ Route::get('/homeregister',[UserController::class,'usershowsearch']);
 Route::get('/userdetail/{userid}',[UserController::class,'userdetail']);
 Route::post('/userdetail/update/{id}',[UserController::class,'updateUser']);
 Route::get('/resetpassword/{userid}',[UserController::class,'resetPassword']);
-
+Route::get('/changepassword', [UserController::class,'viewchangepassword']);
+Route::post('/changepassword', [UserController::class,'storepassword']);
+Route::get('/changeprofile',[UserController::class,'getDataUser']);
+Route::post('/changeprofile',[UserController::class,'upload']);
 
 Route::get('/report', [ReportController::class,'index']);
 Route::get('/report_export', [ReportController::class,'userExport']);

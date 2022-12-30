@@ -1,5 +1,9 @@
 @extends('layouts.menu')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
 
 <div class="row justify-content-center">
         <div class="col-md-10 mt-2">
@@ -47,6 +51,19 @@
 <div class="d-flex align-items-center justify-content-center mb-5">
     {{$users->links()}}
 </div>
-
-
+<script>
+    @if($message = session('success'))
+      Swal.fire({
+          title: 'Success',
+          type: 'success',
+          showCloseButton: true
+      })
+    @elseif($message = session('fail'))
+      Swal.fire({
+          title: 'Something Wrong',
+          type: 'error',
+          showCloseButton: true
+      }) 
+    @endif
+</script>
 @endsection

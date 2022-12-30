@@ -33,6 +33,6 @@ class RegistrationController extends Controller
         $validateData['password'] = Hash::make($validateData['password']);
         User::create($validateData);
 
-        return redirect()->to('/exam_list');
+        return redirect('/homeregister')->with(['success' => 'success']);
     }
 }

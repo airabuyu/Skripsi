@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
+use App\Rules\MatchOldPassword;
 use App\Models\User;
 use App\Models\Role;
 class UserController extends Controller
@@ -22,7 +23,7 @@ class UserController extends Controller
         {
             $stringSearch = request('search');
             $users = DB::table('users')->where('name','like','%'.$stringSearch.'%')
-            ->paginate(2)->withQueryString();
+            ->paginate(10)->withQueryString();
 
         }
 
@@ -46,7 +47,7 @@ class UserController extends Controller
             'password' => Hash::make($userdetails->user_name)
         ]);
 
-        return redirect('/homeregister');
+        return redirect('/homeregister')->with(['success' => 'success']);
     }
 
     public function updateUser(Request $request,$id)
@@ -56,9 +57,7 @@ class UserController extends Controller
             'user_name' => 'required|max:50',
             'name' => 'required',
             'email' => 'required|max:50',
-            'password' => 'required',
             'phone_number' => 'required|numeric',
-            'user_img',
             'is_active',
             'role_id' => 'required',
         ]);
@@ -72,14 +71,59 @@ class UserController extends Controller
             'user_name' => $request->user_name,
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
-            'user_img',
             'is_active' => $setcheck,
             'role_id' => $request->role_id,
         ]);
 
-        return redirect('/homeregister');
+        return redirect('/homeregister')->with(['success' => 'success']);
     }
 
+    public function viewchangepassword()
+    {
+        return view('changepassword');
+    } 
+   
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function storepassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required'],
+        ]);
+        
+        if (Hash::check($request->current_password, Auth::User()->password) && !Hash::check($request->new_password, Auth::User()->password)) {
+                User::find(Auth::User()->id)->update(['password'=> Hash::make($request->new_password)]);
+                $boole = 1;
+                return redirect('/changepassword',)->with(['success' => 'success']);
+        }else
+        {
+            // with(['fail' => 'Pesan fail']);
+                $boole = 0;
+                return redirect('/changepassword')->with(['fail' => 'fail']);
+        }
+        
+    }
+    public function upload(Request $request)
+    {
+        
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('user_img',$filename,'public');
+            Auth()->user()->update(['user_img'=>$filename]);
+            return redirect()->back()->with(['success' => 'success']);
+        }
+        else{
+            return redirect()->back()->with(['fail' => 'fail']);
+        }
+    }
+    
+    public function getDataUser()
+    {
+        return view('changeprofile');
+    }
 }

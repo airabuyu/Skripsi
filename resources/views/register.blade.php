@@ -1,5 +1,10 @@
 @extends('layouts.menu')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+
 <div class="container" style="margin-top: 50px">
     <div class="row">
         <div class="col-md-5 offset-md-3">
@@ -25,7 +30,7 @@
                             <label for="name"></label>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control rounded-top" name="phone_number" id="phone_number" required
+                            <input type="number" class="form-control rounded-top" name="phone_number" id="phone_number" required
                                 value="{{ old('phone_number') }}" placeholder="Phone Number">
                             <label for="name"></label>
                         </div>
@@ -50,9 +55,10 @@
                         </div>
                         <div class="form-floating">
                             <label class="form-check-label">Date of Birth</label>
-                            <input type="date" id="date_of_birth" name="date_of_birth" class="form-control">
+                            <input type="date" id="date_of_birth" required name="date_of_birth" class="form-control">
                         </div>
                         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+                        <a href="/homeregister"  class="w-100 btn btn-lg btn-danger mt-3" title="Cancel">Cancel</a>
                     </form>
                     </main>
                 </div>
@@ -60,4 +66,19 @@
         </div>
     </div>
 </div>
+<script>
+    @if($message = session('success'))
+      Swal.fire({
+          title: 'Success',
+          type: 'success',
+          showCloseButton: true
+      })
+    @elseif($message = session('fail'))
+      Swal.fire({
+          title: 'Something Wrong',
+          type: 'error',
+          showCloseButton: true
+      }) 
+    @endif
+</script>
 @endsection
