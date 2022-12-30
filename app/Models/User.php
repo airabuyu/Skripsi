@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function getPaginationUser()
     {
-        return DB::table('users')->select('*')->paginate(2)->withQueryString();
+        return DB::table('users')->select('*')->paginate(10)->withQueryString();
     }
 }
