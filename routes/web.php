@@ -9,6 +9,7 @@ use App\Http\Controllers\ExamListController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManageFileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,10 +63,12 @@ Route::get('/folder_back/{path}', [ManageFileController::class,'folderBack'])->w
 
 Route::get('/dashboard', [DashboardController::class,'index']);
 
-
-
-
 Route::get('/homeregister',[UserController::class,'usershowsearch']);
 Route::get('/userdetail/{userid}',[UserController::class,'userdetail']);
 Route::post('/userdetail/update/{id}',[UserController::class,'updateUser']);
 Route::get('/resetpassword/{userid}',[UserController::class,'resetPassword']);
+
+
+Route::get('/report', [ReportController::class,'index']);
+Route::get('/report_export', [ReportController::class,'userExport']);
+

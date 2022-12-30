@@ -72,12 +72,10 @@ class QuestionEditorController extends Controller
 
     public function duplicateQuestion(Request $request, Exam $exam)
     {
-        // dd($request->all());
 
 
         $versioning = Exam::where('exam_name', $exam->exam_name)->where('module_name', $exam->module_name)->orderBy('version', 'DESC')->first();
 
-        // dd($versioning);
 
         $exam2 = new Exam();
         $exam2->exam_name = $exam->exam_name;
@@ -141,12 +139,10 @@ class QuestionEditorController extends Controller
 
     public function questionViewer(Request $request, Exam $exam)
     {
-        // dd($exam);
-        // dd($exam->questions()->count());
         $countQuestions = $exam->questions()->count();
 
         $exams = Exam::with('questions.questionAnswers')->where('exams.id', $exam->id)->get();
-        // dd($exams[0]->questions);
+
         return view('question_viewer', compact('exams', 'countQuestions'));
     }
 
@@ -154,29 +150,15 @@ class QuestionEditorController extends Controller
     public function viewQuestion(Request $request)
     {
         $exam = Exam::find($request->exam_id);
-        // $diff = strtotime($exam->exam_close_dt) - strtotime($exam->exam_start_dt);
 
-
-        // $newformat = date('Y-m-d H:i:s',time());
-
-
-        // $time2 = strtotime($request->enddt);
-        // dd($newformat);
-        // dd($diff);
         return view('question_list', compact('exam'));
     }
 
     public function submitAnswers(Request $request)
     {
-        // dd($request->all());
-        // $exam = Exam::find($request->exam_id);
-        // dd(count($request->questions));
-        // dd($exam);
         $mistakes = 0;
-        echo($request->exam_id . "<br>");
         for($i=0; $i<count($request->questions);$i++){
             $arrops = $request->{'options' . $request->questions[$i]};
-            // dd($request->questions[$i]);
 
             foreach (array_keys($arrops, "1", true) as $key) {
 
@@ -186,18 +168,12 @@ class QuestionEditorController extends Controller
 
 
             $arrops = array_values($arrops);
-            echo($request->questions[$i]);
-            echo("<br>");
 
 
             $listAnswers = QuestionAnswer::where('question_id', $request->questions[$i])->get();
 
-            echo($listAnswers);
-            echo("<br>");
-            // dd($listAnswers);
 
             for($j=0; $j<count($listAnswers);$j++){
-                echo($listAnswers[$j]->is_answer . "(" .$listAnswers[$j]->question_answer_name  . ")" . " COMPARE " . $arrops[$j] . "<br>");
                 if($listAnswers[$j]->is_answer != $arrops[$j]){
 
                     $mistakes++;
@@ -213,11 +189,6 @@ class QuestionEditorController extends Controller
 
         $examResult->save();
 
-
-
-        // dd((count($request->questions)-$mistakes) / count($request->questions) * 100);
-        // dd($mistakes);
-        // dd($request->user_id);
         return redirect('dashboard');
     }
 

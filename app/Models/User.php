@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function examResult()
     {
-        return $this->belongsTo(ExamResult::class);
+        return $this->hasMany(ExamResult::class);
     }
 
     public function getPaginationUser()
