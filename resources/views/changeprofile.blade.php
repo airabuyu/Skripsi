@@ -11,10 +11,11 @@
                 <div class="card-body">
                     <main class="form-registration">
                     <h1 class="h3 mb-3 fw-normal text-center">Change Profile</h1>
-                    <form action="/changeprofile" method="POST" enctype="multipart/form-data">
+                    <form action="/changeprofile" method="POST" enctype="multipart/form-data" class="mt-5">
                         @csrf
                         <input type="file" name="image">
-                        <input type="submit" value="Upload">
+
+                        <button type="submit" class="btn w-100 btn btn-lg btn-primary mt-3"value="Upload">Upload</button>
                         <a href="/dashboard"  class="w-100 btn btn-lg btn-danger mt-3" title="Cancel">Cancel</a>
                     </form>
                     </main>
@@ -35,7 +36,7 @@
           title: 'There is no File here',
           type: 'error',
           showCloseButton: true
-      }) 
+      })
     @endif
 </script>
 @endsection

@@ -41,6 +41,9 @@
 
 
 
+    @auth
+
+
     <div class="sidebar">
         <i class='bx bx-menu' id="btn"></i>
         <ul class="nav-list">
@@ -53,29 +56,32 @@
                 <span class="tooltip">Dashboard</span>
             </li>
 
+            @if (Auth::user()->role_id == 1)
+
             <li>
                 <a href="/homeregister">
                     <i class='bx bx-user-plus'></i>
-                    <span class="links_name">User Home</span>
+                    <span class="links_name">Manage User</span>
                 </a>
-                <span class="tooltip">User Home</span>
+                <span class="tooltip">Manage User</span>
             </li>
 
             <li>
                 <a href="/exam_list">
                     <i class='bx bx-task'></i>
-                    <span class="links_name">Create Exam</span>
+                    <span class="links_name">Manage Exam</span>
                 </a>
-                <span class="tooltip">Create Exam</span>
+                <span class="tooltip">Manage Exam</span>
             </li>
 
+            @endif
 
             <li>
                 <a href="/manage_file">
                     <i class='bx bx-folder-open'></i>
-                    <span class="links_name">Manage File</span>
+                    <span class="links_name">Files</span>
                 </a>
-                <span class="tooltip">Manage File</span>
+                <span class="tooltip">Files</span>
             </li>
 
             <li>
@@ -90,7 +96,7 @@
     </div>
 
     <section class="home-section">
-        <nav class="navbar navbar-dark bg-dark navbar-expand-sm" style="justify-content: space-between">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-sm" style="justify-content: space-between; padding-right:150px;">
             <a class="navbar-brand " href="#">
                 {{-- <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo"> --}}
                 {{-- Training Adins --}}
@@ -124,6 +130,7 @@
         </nav>
 
 
+        @endauth
 
 
 

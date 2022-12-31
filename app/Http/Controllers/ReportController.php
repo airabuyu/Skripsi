@@ -60,10 +60,10 @@ class ReportController extends Controller
         // return Excel::download($excel, 'report.xlsx');
 
 
-        $data = DB::select("SELECT u.name, e.exam_name, s.score
-                        FROM users u
-                        INNER JOIN exam_results s ON u.id = s.user_id
-                        INNER JOIN exams e ON e.id = s.exam_id");
+        // $data = DB::select("SELECT u.name, e.exam_name, s.score
+        //                 FROM users u
+        //                 INNER JOIN exam_results s ON u.id = s.user_id
+        //                 INNER JOIN exams e ON e.id = s.exam_id");
 
     // Create a new Excel file and add the data to it
     // $excel = Excel::store('exam_scores', function($excel) use($data) {

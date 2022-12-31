@@ -9,17 +9,13 @@
         <div class="col-12 col-lg-12">
             <div>
                 <div class="card-body">
-                    <div class="fm-search">
-                        <div class="mb-0">
-                            {{-- <div class="input-group input-group-lg">	<span class="input-group-text bg-transparent"><i class="fa fa-search"></i></span>
-                                <input type="text" class="form-control" placeholder="Search the files">
-                            </div> --}}
-                        </div>
-                    </div>
+
 
 
                     <div class="table-responsive mt-3">
                     <div class="d-grid">
+
+                    @if (Auth::user()->role_id == 1)
 
                     <form action="/create_folder" method="post" enctype="multipart/form-data" style="width: 100%;">
                         @csrf
@@ -37,6 +33,9 @@
                           </div>
                     </form>
 
+                    @endif
+
+
 {{--
                     <form action="/create_file" method="post" enctype="multipart/form-data" style="width: 100%;">
                         @csrf
@@ -49,6 +48,8 @@
 
                     </form> --}}
 
+                    @if (Auth::user()->role_id == 1)
+
                     <form action="/create_file"  class="mb-3" method="post" enctype="multipart/form-data" style="width: 100%; margin-top:20px;">
                             @csrf
                             <input type="hidden" name="path" value="{{$path}}">
@@ -58,6 +59,7 @@
                             </div>
                         <button class="btn btn-secondary" type="submit">Add File</button>
                     </form>
+                    @endif
 
 
                         <table class="table table-striped table-hover table-sm mb-0">
@@ -100,6 +102,8 @@
                                         </div>
                                     </td>
                                     <td>
+                                        @if (Auth::user()->role_id == 1)
+
                                         <form action="/delete_folder"  method="post" enctype="multipart/form-data">
                                             @csrf
                                             {{ method_field('DELETE') }}
@@ -112,6 +116,8 @@
                                                       </svg>
                                                 </button>
                                             </form>
+
+                                            @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -141,6 +147,8 @@
                                                         </svg>
                                                     </button>
                                             </form>
+                                            @if (Auth::user()->role_id == 1)
+
                                             <form action="/delete_file"  method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
@@ -152,6 +160,8 @@
                                                         </svg>
                                                     </button>
                                                 </form>
+                                            @endif
+
                                         </div>
                                     </td>
                             </tr>
@@ -168,7 +178,7 @@
     </div>
 
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    {{-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 @endsection
