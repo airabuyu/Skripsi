@@ -81,6 +81,11 @@ class ManageFileController extends Controller
 
     public function createFile(Request $request){
 
+
+        $request->validate([
+            'file' => ['required'],
+        ]);
+
         $path = $request->path;
         // dd($request->file);
         // dd($request->file);
@@ -105,7 +110,6 @@ class ManageFileController extends Controller
         // dd($files);
         $directories = array_map('basename', File::directories($path));
 
-        // return view('manage_file')->with(['path' => $path] );
         return view('manage_file', compact('folders', 'files', 'directories', 'path'));
     }
 

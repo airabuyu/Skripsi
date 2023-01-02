@@ -99,9 +99,9 @@
         <nav class="navbar navbar-dark bg-dark navbar-expand-sm" style="justify-content: space-between; padding-right:150px;">
             <a class="navbar-brand " href="#">
                 {{-- <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo"> --}}
-                {{-- Training Adins --}}
+                Training Adins
 
-                <img width="100px" src="https://cdn.discordapp.com/attachments/641293037976420362/1058081610832019486/meme-mixue-bagian-2-2_11.png" alt="">
+                {{-- <img width="100px" src="https://cdn.discordapp.com/attachments/641293037976420362/1058081610832019486/meme-mixue-bagian-2-2_11.png" alt=""> --}}
             </a>
             <button class="navbar-toggler flasdas " type="button" data-toggle="collapse" data-target="#navbar-list-4"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
