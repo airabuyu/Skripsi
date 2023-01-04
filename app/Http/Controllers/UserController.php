@@ -8,6 +8,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use App\Rules\MatchOldPassword;
 use App\Models\User;
@@ -23,7 +24,7 @@ class UserController extends Controller
         {
             $stringSearch = request('search');
             $users = DB::table('users')->where('name','like','%'.$stringSearch.'%')
-            ->paginate(10)->withQueryString();
+            ->paginate(8)->withQueryString();
 
         }
 
@@ -112,8 +113,15 @@ class UserController extends Controller
     {
         
         if($request->hasFile('image')){
+            // dd(Auth::User()->user_img);
             $filename = $request->image->getClientOriginalName();
             $request->image->storeAs('user_img',$filename,'public');
+            // $path = '/storage/user_img/';
+            // if(Storage::exists($path.Auth::User()->user_img))
+            // {
+            //     dd(Auth::User()->user_img);
+            //     File::delete($path.Auth::User()->user_img);
+            // }
             Auth()->user()->update(['user_img'=>$filename]);
             return redirect()->back()->with(['success' => 'success']);
         }

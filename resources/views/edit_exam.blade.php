@@ -1,6 +1,11 @@
 @extends('layouts.menu')
 @section('content')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+
 
 
 
@@ -42,7 +47,21 @@
     </div>
 </div>
 
-
+<script>
+    @if($message = session('failday'))
+      Swal.fire({
+          title: 'Wrong Input Date',
+          type: 'error',
+          showCloseButton: true
+      })
+    @elseif($message = session('fail'))
+      Swal.fire({
+          title: 'Characters cannot more than 200',
+          type: 'error',
+          showCloseButton: true
+      })
+    @endif
+</script>
 
 
 

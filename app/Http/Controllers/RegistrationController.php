@@ -20,16 +20,17 @@ class RegistrationController extends Controller
         // $validateData['password'] = Input::get('role_id') == 'true' ? 1 : 0;
         // dd($request->all());
         $validateData = $request->validate([
-            'user_name' => 'required|max:50',
-            'name' => 'required',
-            'email' => 'required|max:50',
-            'password' => 'required',
+            'user_name' => 'required|max:100',
+            'name' => 'required|max:100',
+            'email' => 'required|max:100',
+            'password' => 'required|max:100',
             'date_of_birth' => 'required',
-            'phone_number' => 'required|numeric',
+            'phone_number' => 'required|max:12|numeric',
             'user_img',
             'is_active' => 'required',
             'role_id' => 'required',
         ]);
+        
         $validateData['password'] = Hash::make($validateData['password']);
         User::create($validateData);
 

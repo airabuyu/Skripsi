@@ -36,13 +36,13 @@
 <script>
     @if($message = session('success'))
       Swal.fire({
-          title: 'Success',
+          title: 'Success Change Password',
           type: 'success',
           showCloseButton: true
       })
     @elseif($message = session('fail'))
       Swal.fire({
-          title: 'Something Wrong',
+          title: 'Password Incorrect',
           type: 'error',
           showCloseButton: true
       }) 

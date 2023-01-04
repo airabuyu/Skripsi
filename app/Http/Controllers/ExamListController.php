@@ -33,6 +33,17 @@ class ExamListController extends Controller
         // dd($request->all());
         // $start = Carbon::parse($exam->exam_start_dt)->format('Y-m-d\TH:i');
         // $end = Carbon::parse($exam->exam_end_dt)->format('Y-m-d\TH:i');
+        $validateData = $request->validate([
+            'exam_name' => 'required',
+            'module_name' => 'required',
+        ]);
+
+        if(strlen($request->exam_name) > 200 || strlen($request->module_name) > 200)
+        {
+            // dd($request->exam_name);
+            return redirect()->back()->with(['fail' => 'fail']);
+        }
+        
         $exam = Exam::find($request->exam_id);
         // dd($exam);
         $exam->exam_name = $request->exam_name;
@@ -46,6 +57,11 @@ class ExamListController extends Controller
 
         $newformat2 = date('Y-m-d H:i:s',$time2);
 
+        $today = date("Y-m-d H:i:s");
+        if($newformat > $newformat2 || $newformat < $today)
+        {
+            return redirect()->back()->with(['failday' => 'failday']);
+        }
 
         $exam->exam_start_dt = $newformat;
         $exam->exam_close_dt = $newformat2;

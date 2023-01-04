@@ -1,7 +1,10 @@
 @extends('layouts.menu')
 @section('content')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
 <div class="container mt-5">
     <div class="table-wrapper">
         <div class="table-title">
@@ -57,31 +60,25 @@
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-<script type="text/javascript">
-
-    function confirmation(ev) {
+<script>
+function confirmation(ev) {
     ev.preventDefault();
     var urlToRedirect = ev.currentTarget.getAttribute('href'); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
-    console.log(urlToRedirect); // verify if this is the right URL
-    swal.fire({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
+    // console.log(urlToRedirect); // verify if this is the right URL
+    Swal.fire({
+        icon: 'warning',
+        title: 'Are you sure?',
+        text: 'This action cannot be undone!',
+        showCancelButton: true,
+        type : 'warning',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete!'
+    }).then((result) => {
+        if (result.value) {
+            window.location.href=urlToRedirect;
+        }
     })
-    .then((willDelete) => {
-      // redirect with javascript here as per your logic after showing the alert using the urlToRedirect value
-      if (willDelete) {
-        swal.fire("Poof! Your imaginary file has been deleted!", {
-          icon: "success",
-        });
-      } else {
-        swal.fire("Your imaginary file is safe!");
-      }
-    });
-    }
-    </script>
-
+}
+</script>
 @endsection
