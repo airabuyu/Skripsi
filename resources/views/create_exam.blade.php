@@ -32,6 +32,7 @@
                             <input type="datetime-local" id="enddt" name="enddt" class="form-control">
                         </div>
                         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Next</button>
+                        <a class="w-100 btn btn-lg btn-danger mt-3" href="/exam_list">Cancel</a>
                     </form>
                     </main>
                 </div>

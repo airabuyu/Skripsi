@@ -27,7 +27,7 @@
             <th scope="col">No</th>
             <th scope="col">Name</th>
             <th scope="col">Username</th>
-            <th scope="col">User Detail<th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
           title: 'Something Wrong',
           type: 'error',
           showCloseButton: true
-      }) 
+      })
     @endif
 </script>
 @endsection
