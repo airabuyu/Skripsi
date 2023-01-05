@@ -44,7 +44,7 @@ Route::get('/register', [RegistrationController::class,'create'])->middleware('a
 Route::post('/register', [RegistrationController::class,'store'])->middleware('admin');
 
 
-Route::get('/exam_list', [ExamListController::class,'index'])->middleware('auth');
+Route::get('/exam_list', [ExamListController::class,'index'])->middleware('admin');
 Route::get('/delete_exam/{exam}', [ExamListController::class,'destroy'])->middleware('admin');
 Route::get('/edit_exam/{exam}', [ExamListController::class,'editExam'])->middleware('admin');
 Route::post('/exam_editor', [ExamListController::class,'updateExam'])->middleware('admin');

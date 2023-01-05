@@ -26,6 +26,7 @@
         ?>
 
         @foreach ($exams as $exam)
+        @if ($exam->examResults->first() == null)
         <tr>
             <form action="/view_questions"  method="post" enctype="multipart/form-data">
                 @csrf
@@ -46,6 +47,9 @@
                      type="submit">Join Exam</button></td>
             </form>
         </tr>
+        @endif
+
+
         <?php
         $i ++;
         ?>

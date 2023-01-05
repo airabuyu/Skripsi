@@ -14,7 +14,7 @@ class Exam extends Model
 
     public function participants()
     {
-        return $this->belongsToMany(Participant::class);
+        return $this->hasMany(Participant::class);
     }
 
     public function questions()
@@ -24,7 +24,7 @@ class Exam extends Model
 
     public function examResults()
     {
-        return $this->belongsToMany(ExamResult::class);
+        return $this->hasMany(ExamResult::class);
     }
 
 }

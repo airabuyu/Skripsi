@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Exam;
+use App\Models\Participant;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Question;
@@ -90,10 +91,10 @@ class QuestionEditorController extends Controller
         $exam2->version = $newVersion;
         // dd($exam2);
         $exam2->save();
-        
+
         for($i=1; $i<=$request->total_question;$i++){
             $arrops = $request->{'options' . $i};
-            
+
             if($request->question_name[$i] == null && $request->question_name[$i] == ''){
                 // dd($i);
                 return back()->withInput()->with(['failquestion' => 'failquestion']);
@@ -158,6 +159,12 @@ class QuestionEditorController extends Controller
 
     public function viewQuestion(Request $request)
     {
+        $participant = new Participant();
+        $participant->user_id = Auth::user()->id;
+        $participant->exam_id = $request->exam_id;
+        $participant->save();
+
+
         $exam = Exam::find($request->exam_id);
 
         return view('question_list', compact('exam'));
