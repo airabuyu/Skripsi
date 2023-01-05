@@ -34,7 +34,7 @@ class LoginController extends Controller
             }
             return redirect()->intended('/dashboard');
         }
-        return back();
+        return back()->with(['fail' => 'fail']);
     }
 
     public function logout(){

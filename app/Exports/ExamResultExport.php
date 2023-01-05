@@ -32,13 +32,13 @@ class ExamResultExport implements FromCollection, WithHeadings, WithEvents, With
 
         if(Auth::user()->role_id == 1){
 
-            $data = DB::select("SELECT u.name, e.exam_name, s.score, MONTHNAME(e.exam_start_dt)
+            $data = DB::select("SELECT u.name, e.exam_name, s.score, DATENAME(month,e.exam_start_dt)
                             FROM users u
                             INNER JOIN exam_results s ON u.id = s.user_id
                             INNER JOIN exams e ON e.id = s.exam_id");
         }
         else{
-            $data = DB::select("SELECT u.name, e.exam_name, s.score, MONTHNAME(e.exam_start_dt)
+            $data = DB::select("SELECT u.name, e.exam_name, s.score, DATENAME(month,e.exam_start_dt)
                             FROM users u
                             INNER JOIN exam_results s ON u.id = s.user_id
                             INNER JOIN exams e ON e.id = s.exam_id

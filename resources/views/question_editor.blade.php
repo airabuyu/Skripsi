@@ -75,6 +75,13 @@
 
 
 <script type="text/javascript">
+    @if($message = session('success'))
+      Swal.fire({
+          title: 'Success Create Exam',
+          type: 'success',
+          showCloseButton: true
+      })
+    @endif
     const constants = {
         TYPE_CHECK_BOX: 1,
         TYPE_RADIO_BUTTON: 2,

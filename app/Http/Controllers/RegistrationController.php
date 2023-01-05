@@ -25,7 +25,7 @@ class RegistrationController extends Controller
             'email' => 'required|max:100',
             'password' => 'required|max:100',
             'date_of_birth' => 'required',
-            'phone_number' => 'required|max:12|numeric',
+            'phone_number' => 'required|numeric',
             'user_img',
             'is_active' => 'required',
             'role_id' => 'required',

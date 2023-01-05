@@ -23,8 +23,8 @@
         </div>
     </div>
    
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+    <table class="table table-striped table-hover mb-0">
+        <thead class="">
         <tr>
             <th scope="col">No</th>
             <th scope="col">Name</th>

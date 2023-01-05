@@ -1,6 +1,10 @@
 @extends('layouts.menu')
 @section('content')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
 
 <form action="/question_duplicate/{{ $exams[0]->id }}" method="post" enctype="multipart/form-data" class="row col-10 my-form border" style="padding: 20px; margin-left:auto; margin-right:auto;" >
     @csrf
@@ -8,7 +12,6 @@
     <input type="hidden" class="total_question" name= "total_question" value="0">
 
     <h4 class="fw-bold text-center mt-3">{{ $exams[0]->exam_name }}</h4>
-
     <button type="submit" class="btn btn-primary" style="margin-left: auto;">
         Create Exam
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -75,6 +78,20 @@
 
 
 <script type="text/javascript">
+    @if($message = session('failquestion'))
+      Swal.fire({
+          title: 'Question Cannot be empty',
+          type: 'warning',
+          showCloseButton: true
+      })
+    @elseif($message = session('failquestionans'))
+      Swal.fire({
+          title: 'Question Answer Cannot be empty',
+          type: 'warning',
+          showCloseButton: true
+      })
+    @endif
+
     const constants = {
         TYPE_CHECK_BOX: 1,
         TYPE_RADIO_BUTTON: 2,

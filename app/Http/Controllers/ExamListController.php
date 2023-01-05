@@ -58,7 +58,7 @@ class ExamListController extends Controller
         $newformat2 = date('Y-m-d H:i:s',$time2);
 
         $today = date("Y-m-d H:i:s");
-        if($newformat > $newformat2 || $newformat < $today)
+        if($newformat > $newformat2)
         {
             return redirect()->back()->with(['failday' => 'failday']);
         }
@@ -72,7 +72,7 @@ class ExamListController extends Controller
         $exam->update();
 
 
-        return redirect('exam_list');
+        return redirect('exam_list')->with(['success' => 'success']);
     }
 
     public function destroy(Exam $exam){

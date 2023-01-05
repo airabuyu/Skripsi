@@ -66,7 +66,7 @@
                     @endif
 
 
-                        <table class="table table-striped table-hover table-sm mb-0">
+                        <table class="table table-striped table-hover mb-0">
                             <thead>
                                 <tr>
                                     <th>Name</th>

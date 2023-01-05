@@ -66,14 +66,14 @@ class QuestionEditorController extends Controller
             }
         }
 
-        return redirect('exam_list');
+        return redirect('exam_list')->with(['success' => 'success']);
     }
 
 
     public function duplicateQuestion(Request $request, Exam $exam)
     {
 
-
+        // dd($request->All());
         $versioning = Exam::where('exam_name', $exam->exam_name)->where('module_name', $exam->module_name)->orderBy('version', 'DESC')->first();
 
 
@@ -88,11 +88,16 @@ class QuestionEditorController extends Controller
         }
 
         $exam2->version = $newVersion;
-
+        // dd($exam2);
         $exam2->save();
-
+        
         for($i=1; $i<=$request->total_question;$i++){
             $arrops = $request->{'options' . $i};
+            
+            if($request->question_name[$i] == null && $request->question_name[$i] == ''){
+                // dd($i);
+                return back()->withInput()->with(['failquestion' => 'failquestion']);
+            }
 
             foreach (array_keys($arrops, "1", true) as $key) {
 
@@ -123,6 +128,10 @@ class QuestionEditorController extends Controller
             $j = 0;
             while ($j < $arrayLength)
             {
+                if($request->{'names' . $i}[$j] == null && $request->{'names' . $i}[$j] == '')
+                {
+                    return back()->withInput()->with(['failquestionans' => 'failquestionans']);
+                }
                 $options = new QuestionAnswer();
                 $options->question_id = $question->id;
                 $options->question_answer_name = $request->{'names' . $i}[$j];
@@ -133,7 +142,7 @@ class QuestionEditorController extends Controller
             }
         }
 
-        return redirect('exam_list');
+        return redirect('exam_list')->with(['success' => 'success']);
     }
 
 
@@ -189,7 +198,7 @@ class QuestionEditorController extends Controller
 
         $examResult->save();
 
-        return redirect('dashboard');
+        return redirect('dashboard')->with(['success' => 'success']);
     }
 
 }

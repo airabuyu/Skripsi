@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-striped table-hover mb-0">
             <thead>
                 <tr>
                     <th>Exam Name</th>
@@ -80,5 +80,18 @@ function confirmation(ev) {
         }
     })
 }
+@if($message = session('success'))
+      Swal.fire({
+          title: 'Success Update Exam',
+          type: 'success',
+          showCloseButton: true
+      })
+    @elseif($message = session('fail'))
+      Swal.fire({
+          title: 'Wrong Input',
+          type: 'error',
+          showCloseButton: true
+      }) 
+    @endif
 </script>
 @endsection

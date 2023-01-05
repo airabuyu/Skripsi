@@ -42,8 +42,9 @@ class CreateExamController extends Controller
         $newformat2 = date('Y-m-d H:i:s',$time2);
 
         $today = date("Y-m-d H:i:s");
-        if($newformat > $newformat2 || $newformat < $today)
+        if($newformat >= $newformat2)
         {
+            // dd($newformat2);
             return redirect()->back()->with(['failday' => 'failday']);
         }
 

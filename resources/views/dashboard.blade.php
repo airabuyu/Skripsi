@@ -1,13 +1,16 @@
 @extends('layouts.menu')
 @section('content')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
 
 <div class="container mt-5">
     <h2>Upcoming Exams in this Month</h2>
 
     <!-- Create a table to display the exam list -->
-    <table class="table table-striped">
+    <table class="table table-striped table-hover mb-0">
       <thead>
         <tr>
           <th>Exam Name</th>
@@ -53,6 +56,13 @@
 
 
   <script>
+    @if($message = session('success'))
+      Swal.fire({
+          title: 'Thank you for Paticipate :)',
+          type: 'success',
+          showCloseButton: true
+      })
+    @endif
     const exams = {!! json_encode($exams) !!}
 
     // console.log(exams.length);
