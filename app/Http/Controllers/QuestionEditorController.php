@@ -25,15 +25,22 @@ class QuestionEditorController extends Controller
     public function createQuestion(Request $request, Exam $exam)
     {
         // dd($request->all());
+        $exam = $exam;
+        // dd($exam);
         for($i=1; $i<=$request->total_question;$i++){
+            if($request->question_name[$i] == null && $request->question_name[$i] == ''){
+                // dd($i);
+                return view('question_editor',compact('exam'))->with(['failquestion' => 'failquestion']);
+            }
             $arrops = $request->{'options' . $i};
-
+            
             foreach (array_keys($arrops, "1", true) as $key) {
 
                 unset($arrops[$key-1]);
 
             }
 
+            
 
             $arrops = array_values($arrops);
 
@@ -57,6 +64,10 @@ class QuestionEditorController extends Controller
             $j = 0;
             while ($j < $arrayLength)
             {
+                if($request->{'names' . $i}[$j] == null && $request->{'names' . $i}[$j] == '')
+                {
+                    return back()->withInput()->with(['failquestionans' => 'failquestionans']);
+                }
                 $options = new QuestionAnswer();
                 $options->question_id = $question->id;
                 $options->question_answer_name = $request->{'names' . $i}[$j];
@@ -143,7 +154,7 @@ class QuestionEditorController extends Controller
             }
         }
 
-        return redirect('exam_list')->with(['success' => 'success']);
+        return redirect('exam_list')->with(['successupdate' => 'successupdate']);
     }
 
 

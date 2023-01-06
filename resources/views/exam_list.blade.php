@@ -80,9 +80,15 @@ function confirmation(ev) {
         }
     })
 }
-@if($message = session('success'))
+@if($message = session('successupdate'))
       Swal.fire({
           title: 'Success Update Exam',
+          type: 'success',
+          showCloseButton: true
+      })
+      @elseif($message = session('success'))
+      Swal.fire({
+          title: 'Success Create Exam',
           type: 'success',
           showCloseButton: true
       })

@@ -21,7 +21,6 @@ class CreateExamsTable extends Migration
             $table->dateTime('exam_close_dt')->nullable();
             $table->string('module_name');
             $table->string('version')->nullable();
-
             $table->timestamps();
 
             // $table->unsignedBigInteger('exam_id')->nullable();

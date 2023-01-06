@@ -59,6 +59,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|max:50',
             'phone_number' => 'required|numeric',
+            'department' => 'required|max:100',
+            'status' => 'required|max:100',
             'is_active',
             'role_id' => 'required',
         ]);
@@ -73,6 +75,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
+            'department' => $request->department,
+            'status' => $request->status,
             'is_active' => $setcheck,
             'role_id' => $request->role_id,
         ]);

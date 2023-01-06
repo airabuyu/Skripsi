@@ -81,6 +81,18 @@
           type: 'success',
           showCloseButton: true
       })
+    @elseif($message = session('failquestion'))
+      Swal.fire({
+          title: 'Question Cannot be empty',
+          type: 'warning',
+          showCloseButton: true
+      })
+    @elseif($message = session('failquestionans'))
+      Swal.fire({
+          title: 'Question Answer Cannot be empty',
+          type: 'warning',
+          showCloseButton: true
+      })
     @endif
     const constants = {
         TYPE_CHECK_BOX: 1,

@@ -25,6 +25,16 @@
                             <label for="name"></label>
                         </div>
                         <div class="form-floating">
+                            <input type="text" class="form-control rounded-top" name="department" id="department" required
+                                value="{{ old('name',$userdetails->department) }}" placeholder="Department">
+                            <label for="department"></label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control rounded-top" name="status" id="status" required
+                                value="{{ old('status',$userdetails->status) }}" placeholder="Status">
+                            <label for="status"></label>
+                        </div>
+                        <div class="form-floating">
                             <input type="number" class="form-control rounded-top" name="phone_number" id="phone_number" required
                                 value="{{ old('phone_number',$userdetails->phone_number) }}" placeholder="Phone Number">
                             <label for="name"></label>

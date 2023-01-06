@@ -81,7 +81,7 @@ class ExamListController extends Controller
             $p->delete();
         }
 
-        return redirect('exam_list')->with(['success' => 'success']);
+        return redirect('exam_list')->with(['successupdate' => 'successupdate']);
     }
 
     public function destroy(Exam $exam){

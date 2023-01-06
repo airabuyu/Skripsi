@@ -26,6 +26,8 @@ class RegistrationController extends Controller
             'password' => 'required|max:100',
             'date_of_birth' => 'required',
             'phone_number' => 'required|numeric',
+            'department' => 'required|max:100',
+            'status' => 'required|max:100',
             'user_img',
             'is_active' => 'required',
             'role_id' => 'required',
