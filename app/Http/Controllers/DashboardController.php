@@ -15,9 +15,7 @@ class DashboardController extends Controller
     public function index(){
 
 
-        $exams = Exam::with(['examResults' => function($query) {
-            // $query->where('user_id', '!=', Auth::user()->id);
-          }])->whereMonth('exam_start_dt', date('m'))->whereYear('exam_start_dt', date('Y'))
+        $exams = Exam::with('examResults', 'participants')->whereMonth('exam_start_dt', date('m'))->whereYear('exam_start_dt', date('Y'))
         ->where('exam_close_dt', '>=', date('Y-m-d H:i:s'))->get();
         // dd($exams);
 

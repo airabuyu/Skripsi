@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Exam;
+use App\Models\Participant;
 use Carbon\Carbon;
 
 class ExamListController extends Controller
@@ -43,7 +44,7 @@ class ExamListController extends Controller
             // dd($request->exam_name);
             return redirect()->back()->with(['fail' => 'fail']);
         }
-        
+
         $exam = Exam::find($request->exam_id);
         // dd($exam);
         $exam->exam_name = $request->exam_name;
@@ -71,6 +72,14 @@ class ExamListController extends Controller
 
         $exam->update();
 
+        // dd($exam->id);
+
+        $participant = Participant::where('exam_id' , $exam->id)->get();
+
+        // dd($participant);
+        foreach($participant as $p){
+            $p->delete();
+        }
 
         return redirect('exam_list')->with(['success' => 'success']);
     }

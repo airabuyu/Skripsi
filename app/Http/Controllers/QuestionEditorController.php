@@ -205,6 +205,11 @@ class QuestionEditorController extends Controller
 
         $examResult->save();
 
+        $examResult2 = ExamResult::where('user_id', Auth::user()->id)->where('exam_id', $request->exam_id)->first();
+        if($examResult2 != null){
+            $examResult2->score = (count($request->questions)- $mistakes) / count($request->questions) * 100;
+        }
+
         return redirect('dashboard')->with(['success' => 'success']);
     }
 
