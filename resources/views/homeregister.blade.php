@@ -30,7 +30,7 @@
             <th scope="col">Name</th>
             <th scope="col">Username</th>
             <th scope="col">Department</th>
-            <th scope="col">Status</th>
+            <th scope="col">Jabatan</th>
             <th>Action</th>
         </tr>
         </thead>
