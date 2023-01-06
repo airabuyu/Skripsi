@@ -27,8 +27,8 @@
 
         @foreach ($exams as $exam)
         @if ( ($exam->examResults->first() == null && $exam->participants->first() == null)
-            || $exam->examResults->first() == null && $exam->participants->first() != null
-            || $exam->examResults->first() != null && $exam->participants->first() == null
+            || ($exam->examResults->first() == null && $exam->participants->first() != null)
+            || ($exam->examResults->first() != null && $exam->participants->first() == null)
         )
         <tr>
             <form action="/view_questions"  method="post" enctype="multipart/form-data">
