@@ -30,7 +30,7 @@ class QuestionEditorController extends Controller
         for($i=1; $i<=$request->total_question;$i++){
             if($request->question_name[$i] == null && $request->question_name[$i] == ''){
                 // dd($i);
-                return view('question_editor',compact('exam'))->with(['failquestion' => 'failquestion']);
+                return redirect()->route('question_editor_view')->with(['exam' => $exam])->with(['failquestion' => 'failquestion']);
             }
             $arrops = $request->{'options' . $i};
             
