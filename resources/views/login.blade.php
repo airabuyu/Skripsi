@@ -16,10 +16,10 @@
                     <div class="card p-4 bg-white rounded">
                         <div class="card-body p-4 ">
                             {{-- <h3 class=" d-flex justify-content-start mb-4">Login</h3> --}}
-                            <label for="email" >Email</label>
-                            <input id="email" type="email" class="form-control form-control-lg" placeholder="email" name="email">
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            <label for="user_name" >Username</label>
+                            <input id="user_name"  class="form-control form-control-lg" placeholder="username" name="user_name">
+                            @if ($errors->has('user_name'))
+                                <span class="text-danger">{{ $errors->first('user_name') }}</span>
                             @endif
                             <label for="password">Password</label>
                             <input id="password" type="password" class="form-control form-control-lg" placeholder="password"
@@ -48,7 +48,7 @@
           title: 'Wrong Input',
           type: 'error',
           showCloseButton: true
-      }) 
+      })
     @endif
 </script>
 @endsection
