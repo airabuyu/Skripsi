@@ -103,6 +103,9 @@
     echo '  if (remainingSeconds < 10) {';
     echo '    remainingSeconds = "0" + remainingSeconds;';
     echo '  }';
+    echo '  if (remainingSeconds == "00" && minutes == 5 ) {';
+    echo '   alert("Exam will end in 5 minutes");';
+    echo '  }';
     echo '  document.getElementById("hours").innerHTML = ("0" + hours).slice(-2) ;';
     echo '  document.getElementById("minutes").innerHTML = ("0" + minutes).slice(-2) ;';
     echo '  document.getElementById("seconds").innerHTML = remainingSeconds;';

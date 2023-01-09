@@ -57,7 +57,15 @@
                     <form action="/create_file"  class="mb-3" method="post" enctype="multipart/form-data" style="width: 100%; margin-top:20px;">
                             @csrf
                             <input type="hidden" name="path" value="{{$path}}">
+                            @php
 
+                            //  if($errors!= null)
+                            //     dd($errors);
+
+                            @endphp
+                            @if ($errors->has('file'))
+                                <span class="text-danger">{{ $errors->first('file') }}</span>
+                            @endif
                             <div class="form-group files color">
                                 <input type="file" name="file" class="form-control" multiple="">
                             </div>
@@ -109,8 +117,8 @@
                                         @if (Auth::user()->role_id == 1)
 
                                         <form action="/delete_folder"  method="post" enctype="multipart/form-data">
-                                            @csrf
                                             {{ method_field('DELETE') }}
+                                            @csrf
                                             <input type="hidden" name="path" value="{{$path. '\\' . $folder}}">
 
                                                 <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this item?');">

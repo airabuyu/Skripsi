@@ -83,8 +83,13 @@ class ManageFileController extends Controller
 
 
         $request->validate([
-            'file' => ['required'],
-        ]);
+            'file' => 'required|mimes:pdf',
+        ],
+        [
+            'file.mimes' => 'File must be .pdf',
+            'file.required' => 'File must be filled',
+        ]
+        );
 
         $path = $request->path;
         // dd($request->file);
@@ -146,7 +151,9 @@ class ManageFileController extends Controller
         $directories = array_map('basename', File::directories($path));
 
         // return view('manage_file')->with(['path' => $path] );
-        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
+        return redirect('manage_file')->with(compact('folders', 'files', 'directories', 'path'));
+        // return redirect()->back();
+        // return view('manage_file', compact('folders', 'files', 'directories', 'path'));
     }
 
     public function deleteFolder(Request $request){
@@ -177,7 +184,8 @@ class ManageFileController extends Controller
         $directories = array_map('basename', File::directories($path));
 
         // return view('manage_file')->with(['path' => $path] );
-        return view('manage_file', compact('folders', 'files', 'directories', 'path'));
+        return redirect()->back()->with(compact('folders', 'files', 'directories', 'path'));
+        // return view('manage_file', compact('folders', 'files', 'directories', 'path'));
     }
 
 

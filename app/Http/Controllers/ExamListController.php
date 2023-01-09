@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Exam;
 use App\Models\Participant;
+use App\Models\ExamResult;
 use Carbon\Carbon;
 
 class ExamListController extends Controller
@@ -75,10 +76,15 @@ class ExamListController extends Controller
         // dd($exam->id);
 
         $participant = Participant::where('exam_id' , $exam->id)->get();
+        $examresult= ExamResult::where('score', '<' , 75)->get();
 
         // dd($participant);
         foreach($participant as $p){
             $p->delete();
+        }
+
+        foreach($examresult as $e){
+            $e->delete();
         }
 
         return redirect('exam_list')->with(['successupdate' => 'successupdate']);

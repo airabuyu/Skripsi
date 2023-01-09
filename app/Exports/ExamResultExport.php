@@ -32,17 +32,37 @@ class ExamResultExport implements FromCollection, WithHeadings, WithEvents, With
 
         if(Auth::user()->role_id == 1){
 
-            $data = DB::select("SELECT u.name, e.exam_name, s.score, DATENAME(month,e.exam_start_dt)
-                            FROM users u
-                            INNER JOIN exam_results s ON u.id = s.user_id
-                            INNER JOIN exams e ON e.id = s.exam_id");
-        }
-        else{
-            $data = DB::select("SELECT u.name, e.exam_name, s.score, DATENAME(month,e.exam_start_dt)
+            $data = DB::select("SELECT u.name, e.exam_name, s.score, CONVERT(varchar, e.exam_start_dt, 106),
+                            CASE
+                                WHEN s.score > 75
+                                    THEN 'PASSED'
+                                ELSE
+                                    'FAILED'
+                            END
+                            AS RESULT
                             FROM users u
                             INNER JOIN exam_results s ON u.id = s.user_id
                             INNER JOIN exams e ON e.id = s.exam_id
-                            WHERE u.id = ? ", [Auth::user()->id]);
+                            ORDER BY u.name ASC, e.exam_start_dt DESC
+                            "
+                        );
+        }
+        else{
+            $data = DB::select("SELECT u.name, e.exam_name, s.score, CONVERT(varchar, e.exam_start_dt, 106),
+                            CASE
+                                WHEN s.score > 75
+                                    THEN 'PASSED'
+                                ELSE
+                                    'FAILED'
+                            END
+                            AS RESULT
+                            FROM users u
+                            INNER JOIN exam_results s ON u.id = s.user_id
+                            INNER JOIN exams e ON e.id = s.exam_id
+                            WHERE u.id = ?
+                            INNER JOIN exams e ON e.id = s.exam_id
+                            ORDER BY u.name ASC, e.exam_start_dt DESC
+                            ", [Auth::user()->id]);
         }
 
 
@@ -51,7 +71,7 @@ class ExamResultExport implements FromCollection, WithHeadings, WithEvents, With
 
     public function headings(): array
     {
-        return ["User Name", "Exam Name", "Score", "Exam Month"];
+        return ["User Name", "Exam Name", "Score", "Exam Date", "Result"];
     }
 
 
