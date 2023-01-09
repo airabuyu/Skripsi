@@ -24,12 +24,7 @@ class QuestionEditorController extends Controller
 
     public function createQuestion(Request $request, Exam $exam)
     {
-
-
-
         // dd($request->all());
-
-
         $exam = $exam;
         // dd($exam);
         for($i=1; $i<=$request->total_question;$i++){

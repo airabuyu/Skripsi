@@ -158,13 +158,18 @@
 
         newQuestionGroup.find('.add_button').click(function(){
             addCheckBox(newQuestionGroup);
+            divs[curr].querySelector('.text_input').required = true;
         });
         newQuestionGroup.find('.add_button2').click(function(){
             addRadioButton(newQuestionGroup);
+            divs[curr].querySelector('.text_input').required = true;
         });
         newQuestionGroup.find('.close').click(function() {
             deleteQuestion(newQuestionGroup);
         });
+
+        divs[curr].querySelector('.q_name').required = true;
+
 
         document.getElementsByClassName('total_question')[0].setAttribute('value', totalQuestions);
     };
