@@ -60,7 +60,6 @@ class ExamResultExport implements FromCollection, WithHeadings, WithEvents, With
                             INNER JOIN exam_results s ON u.id = s.user_id
                             INNER JOIN exams e ON e.id = s.exam_id
                             WHERE u.id = ?
-                            INNER JOIN exams e ON e.id = s.exam_id
                             ORDER BY u.name ASC, e.exam_start_dt DESC
                             ", [Auth::user()->id]);
         }

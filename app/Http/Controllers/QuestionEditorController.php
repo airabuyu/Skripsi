@@ -24,7 +24,12 @@ class QuestionEditorController extends Controller
 
     public function createQuestion(Request $request, Exam $exam)
     {
+
+
+
         // dd($request->all());
+
+
         $exam = $exam;
         // dd($exam);
         for($i=1; $i<=$request->total_question;$i++){
@@ -33,14 +38,14 @@ class QuestionEditorController extends Controller
                 return redirect()->route('question_editor_view')->with(['exam' => $exam])->with(['failquestion' => 'failquestion']);
             }
             $arrops = $request->{'options' . $i};
-            
+
             foreach (array_keys($arrops, "1", true) as $key) {
 
                 unset($arrops[$key-1]);
 
             }
 
-            
+
 
             $arrops = array_values($arrops);
 
